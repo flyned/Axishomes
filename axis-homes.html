@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axis Homes — Luxury Estates in Bangalore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0c1118;          /* near-black with blue undertone */
+    --ink-2:#121925;
+    --ink-3:#1a2330;
+    --line:#2c3a4d;
+    --gold:#c9a24b;
+    --gold-bright:#e3c478;
+    --gold-soft:#9c8146;
+    --paper:#f3f0e9;
+    --text:#d8dde6;
+    --text-dim:#8c97a6;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost',-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);color:var(--text);
+    font-family:var(--sans);font-weight:300;
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--ink)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+
+  /* ---- HEADER ---- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    transition:background .4s,border-color .4s,padding .4s;
+    border-bottom:1px solid transparent;padding:22px 0;
+  }
+  header.scrolled{background:rgba(12,17,24,.92);backdrop-filter:blur(14px);border-bottom-color:var(--line);padding:14px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:13px}
+  .brand .mark{width:34px;height:34px;flex:none}
+  .brand .name{font-family:var(--serif);font-size:25px;letter-spacing:.16em;color:var(--paper);line-height:1}
+  .brand .name span{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.52em;color:var(--gold);font-weight:400;margin-top:3px;padding-left:2px}
+  nav ul{display:flex;gap:34px;list-style:none;align-items:center}
+  nav ul a{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);transition:color .25s;position:relative}
+  nav ul a:hover{color:var(--paper)}
+  nav ul a.nri{color:var(--gold-bright)}
+  nav ul a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold);transition:width .3s}
+  nav ul a:hover::after{width:100%}
+  .menu-btn{display:none;background:none;border:none;color:var(--paper);font-size:24px;cursor:pointer}
+
+  /* ---- HERO ---- */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg::before{content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 70% 20%, rgba(40,60,90,.55), transparent 60%),
+      linear-gradient(180deg, rgba(12,17,24,.55) 0%, rgba(12,17,24,.4) 40%, rgba(12,17,24,.96) 100%),
+      linear-gradient(120deg,#0c1118 0%,#16202e 45%,#243750 75%,#2d4258 100%);
+    z-index:2;
+  }
+  .hero-bg .sky{position:absolute;inset:0;
+    background:linear-gradient(160deg,#0e1622 0%,#1c2c40 38%,#3a5575 62%,#6f7d8a 80%,#caa96f 100%);
+    opacity:.9;
+  }
+  /* skyline silhouette */
+  .skyline{position:absolute;bottom:0;left:0;right:0;height:38%;z-index:1;
+    background:linear-gradient(180deg,transparent,rgba(8,12,18,.9));}
+  .hero-content{position:relative;z-index:3;width:100%}
+  .eyebrow{font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:26px;opacity:0;animation:rise .9s .2s forwards}
+  .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(44px,6.5vw,86px);line-height:1.02;color:var(--paper);max-width:14ch;margin-bottom:24px;opacity:0;animation:rise .9s .35s forwards}
+  .hero h1 em{font-style:italic;color:var(--gold-bright)}
+  .hero .lede{font-size:clamp(15px,1.5vw,18px);color:var(--text);max-width:46ch;letter-spacing:.02em;opacity:0;animation:rise .9s .5s forwards}
+  .hero .lede b{color:var(--paper);font-weight:400}
+
+  /* ---- MICRO-MARKET NAVIGATOR (signature) ---- */
+  .navigator{margin-top:54px;opacity:0;animation:rise .9s .65s forwards}
+  .nav-label{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim);margin-bottom:14px}
+  .nav-bar{display:flex;flex-wrap:wrap;gap:0;background:rgba(18,25,37,.72);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:2px;max-width:880px}
+  .nav-field{flex:1;min-width:170px;padding:18px 22px;border-right:1px solid var(--line);position:relative}
+  .nav-field:last-of-type{border-right:none}
+  .nav-field label{display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:6px}
+  .nav-field select{width:100%;background:none;border:none;color:var(--paper);font-family:var(--sans);font-size:15px;font-weight:400;cursor:pointer;appearance:none;letter-spacing:.02em}
+  .nav-field select option{background:var(--ink-2);color:var(--text)}
+  .nav-field::after{content:"⌄";position:absolute;right:20px;top:48%;color:var(--gold);font-size:14px;pointer-events:none}
+  .nav-go{flex:none;border:none;background:var(--gold);color:var(--ink);font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.18em;text-transform:uppercase;padding:0 36px;cursor:pointer;transition:background .25s}
+  .nav-go:hover{background:var(--gold-bright)}
+  .micro-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+  .micro-chips span{font-size:11px;letter-spacing:.12em;color:var(--text-dim)}
+  .micro-chips a{font-size:11px;letter-spacing:.12em;color:var(--gold);border-bottom:1px dotted var(--gold-soft);padding-bottom:1px}
+  .micro-chips a:hover{color:var(--gold-bright)}
+
+  /* ---- SECTION SHELL ---- */
+  section{position:relative}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 60px}
+  .sec-eyebrow{font-size:11px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+  .sec-head h2{font-family:var(--serif);font-weight:500;font-size:clamp(30px,4vw,46px);color:var(--paper);line-height:1.08}
+  .sec-head p{margin-top:16px;color:var(--text-dim);font-size:16px}
+  .rule{width:46px;height:1px;background:var(--gold);margin:22px auto 0}
+
+  /* ---- SERVICE TRACKS ---- */
+  .tracks{padding:120px 0;background:var(--ink-2);border-top:1px solid var(--line)}
+  .track-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .track{background:var(--ink);border:1px solid var(--line);padding:42px 34px;transition:border-color .35s,transform .35s;position:relative;overflow:hidden}
+  .track::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+  .track:hover{border-color:var(--gold-soft);transform:translateY(-4px)}
+  .track:hover::before{transform:scaleX(1)}
+  .track .ico{width:46px;height:46px;color:var(--gold);margin-bottom:26px}
+  .track h3{font-family:var(--serif);font-size:27px;font-weight:500;color:var(--paper);line-height:1.1;margin-bottom:6px}
+  .track .sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:18px}
+  .track p{color:var(--text-dim);font-size:14.5px;margin-bottom:22px}
+  .track ul{list-style:none;margin-bottom:28px}
+  .track ul li{font-size:13.5px;color:var(--text);padding:7px 0 7px 22px;position:relative;border-bottom:1px solid rgba(44,58,77,.5)}
+  .track ul li::before{content:"";position:absolute;left:0;top:14px;width:7px;height:7px;border:1px solid var(--gold);transform:rotate(45deg)}
+  .track .cta{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-bright);font-weight:400}
+  .track .cta .arr{transition:transform .25s}
+  .track:hover .cta .arr{transform:translateX(5px)}
+  .developers{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);font-size:11px;letter-spacing:.12em;color:var(--text-dim)}
+  .developers b{display:block;color:var(--gold-soft);letter-spacing:.2em;text-transform:uppercase;font-size:10px;margin-bottom:8px;font-weight:500}
+  .dev-logos{color:var(--text);font-family:var(--serif);font-size:16px;letter-spacing:.08em}
+
+  /* ---- LISTINGS ---- */
+  .listings{padding:120px 0;background:var(--ink)}
+  .filter-row{display:flex;justify-content:center;gap:12px;margin-bottom:48px;flex-wrap:wrap}
+  .filter-row button{background:none;border:1px solid var(--line);color:var(--text-dim);font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:11px 24px;cursor:pointer;transition:all .25s}
+  .filter-row button:hover{color:var(--paper);border-color:var(--gold-soft)}
+  .filter-row button.active{background:var(--gold);border-color:var(--gold);color:var(--ink);font-weight:500}
+  .listing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .card{background:var(--ink-2);border:1px solid var(--line);overflow:hidden;transition:transform .4s,border-color .4s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-6px);border-color:var(--gold-soft)}
+  .card-img{position:relative;height:230px;overflow:hidden}
+  .card-img .ph{position:absolute;inset:0;transition:transform .6s}
+  .card:hover .card-img .ph{transform:scale(1.06)}
+  .tag{position:absolute;top:16px;left:16px;z-index:2;font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:rgba(12,17,24,.78);backdrop-filter:blur(4px);color:var(--gold-bright);padding:6px 12px;border:1px solid var(--gold-soft)}
+  .fav{position:absolute;top:14px;right:14px;z-index:2;width:34px;height:34px;border:1px solid rgba(243,240,233,.4);background:rgba(12,17,24,.5);color:var(--paper);border-radius:50%;display:grid;place-items:center;cursor:pointer;transition:all .25s}
+  .fav:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  .card-body{padding:26px 26px 24px;flex:1;display:flex;flex-direction:column}
+  .card h4{font-family:var(--serif);font-size:23px;font-weight:500;color:var(--paper);line-height:1.15;margin-bottom:5px}
+  .loc{font-size:12px;letter-spacing:.08em;color:var(--text-dim);display:flex;align-items:center;gap:6px;margin-bottom:18px}
+  .loc svg{width:13px;height:13px;color:var(--gold)}
+  .specs{display:flex;gap:0;margin-bottom:18px;border:1px solid var(--line)}
+  .specs div{flex:1;text-align:center;padding:11px 6px;border-right:1px solid var(--line)}
+  .specs div:last-child{border-right:none}
+  .specs .v{font-size:14px;color:var(--paper);font-weight:400}
+  .specs .k{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin-top:3px}
+  .price{font-family:var(--serif);font-size:26px;color:var(--gold-bright);margin-bottom:20px}
+  .price small{font-family:var(--sans);font-size:12px;letter-spacing:.1em;color:var(--text-dim);margin-left:6px}
+  .card-foot{margin-top:auto}
+  .rera{font-size:10px;letter-spacing:.1em;color:var(--text-dim);padding:10px 0;border-top:1px solid var(--line);margin-bottom:16px;display:flex;align-items:center;gap:7px}
+  .rera b{color:var(--gold-soft);font-weight:500}
+  .rera .seal{width:14px;height:14px;color:var(--gold)}
+  .card-actions{display:flex;gap:10px}
+  .btn-primary{flex:1;background:var(--gold);border:none;color:var(--ink);font-family:var(--sans);font-weight:500;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;padding:13px;cursor:pointer;transition:background .25s}
+  .btn-primary:hover{background:var(--gold-bright)}
+  .btn-ghost{flex:none;background:none;border:1px solid var(--line);color:var(--text-dim);font-family:var(--sans);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;padding:13px 18px;cursor:pointer;transition:all .25s}
+  .btn-ghost:hover{color:var(--paper);border-color:var(--gold-soft)}
+
+  /* ---- NRI BAND ---- */
+  .nri-band{padding:110px 0;background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .nri-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+  .nri-inner h2{font-family:var(--serif);font-size:clamp(28px,3.6vw,42px);font-weight:500;color:var(--paper);line-height:1.12;margin-bottom:20px}
+  .nri-inner h2 em{font-style:italic;color:var(--gold-bright)}
+  .nri-inner .sec-eyebrow{text-align:left}
+  .nri-inner p{color:var(--text-dim);font-size:16px;margin-bottom:30px;max-width:46ch}
+  .nri-points{list-style:none}
+  .nri-points li{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .nri-points .n{font-family:var(--serif);font-size:20px;color:var(--gold);flex:none;width:30px}
+  .nri-points .t b{display:block;color:var(--paper);font-weight:400;font-size:15.5px;letter-spacing:.02em}
+  .nri-points .t span{font-size:13.5px;color:var(--text-dim)}
+  .nri-cta{display:inline-block;margin-top:34px;border:1px solid var(--gold);color:var(--gold-bright);font-size:12px;letter-spacing:.18em;text-transform:uppercase;padding:15px 38px;transition:all .3s}
+  .nri-cta:hover{background:var(--gold);color:var(--ink)}
+
+  /* ---- TRUST STRIP ---- */
+  .trust{padding:64px 0;background:var(--ink);border-bottom:1px solid var(--line)}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
+  .trust-grid .num{font-family:var(--serif);font-size:46px;color:var(--gold-bright);line-height:1}
+  .trust-grid .lbl{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim);margin-top:10px}
+
+  /* ---- CONTACT ---- */
+  .contact{padding:120px 0;background:var(--ink-2)}
+  .contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .contact h2{font-family:var(--serif);font-size:clamp(30px,4vw,46px);font-weight:500;color:var(--paper);line-height:1.08;margin-bottom:18px}
+  .contact h2 em{font-style:italic;color:var(--gold-bright)}
+  .contact .lede{color:var(--text-dim);font-size:16px;max-width:42ch;margin-bottom:34px}
+  .contact-detail{padding:18px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .contact-detail .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+  .contact-detail .v{color:var(--paper);font-size:15px}
+  .form{background:var(--ink);border:1px solid var(--line);padding:38px}
+  .form .field{margin-bottom:22px}
+  .form label{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:9px}
+  .form input,.form select,.form textarea{width:100%;background:var(--ink-2);border:1px solid var(--line);color:var(--paper);font-family:var(--sans);font-size:14px;padding:13px 15px;transition:border-color .25s}
+  .form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--gold)}
+  .form select{appearance:none}
+  .form .submit{width:100%;background:var(--gold);border:none;color:var(--ink);font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;padding:16px;cursor:pointer;transition:background .25s;margin-top:4px}
+  .form .submit:hover{background:var(--gold-bright)}
+
+  /* ---- FOOTER ---- */
+  footer{background:var(--ink);border-top:1px solid var(--line);padding:64px 0 34px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid var(--line)}
+  .foot-brand .name{font-family:var(--serif);font-size:24px;letter-spacing:.14em;color:var(--paper)}
+  .foot-brand p{color:var(--text-dim);font-size:13.5px;margin-top:16px;max-width:34ch}
+  .foot-col h5{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+  .foot-col a{display:block;color:var(--text-dim);font-size:13.5px;padding:6px 0;transition:color .25s}
+  .foot-col a:hover{color:var(--paper)}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;flex-wrap:wrap;gap:12px}
+  .foot-bottom p{font-size:12px;color:var(--text-dim);letter-spacing:.04em}
+  .foot-bottom .rera-foot{font-size:11px;color:var(--gold-soft);letter-spacing:.1em}
+
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ---- RESPONSIVE ---- */
+  @media(max-width:980px){
+    .track-grid,.listing-grid{grid-template-columns:repeat(2,1fr)}
+    .nri-inner,.contact-inner{grid-template-columns:1fr;gap:40px}
+    .trust-grid{grid-template-columns:repeat(2,1fr);gap:40px 20px}
+    .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+  }
+  @media(max-width:680px){
+    .wrap{padding:0 22px}
+    nav ul{display:none}
+    .menu-btn{display:block}
+    .track-grid,.listing-grid{grid-template-columns:1fr}
+    .nav-field{min-width:100%;border-right:none;border-bottom:1px solid var(--line)}
+    .nav-go{width:100%;padding:16px}
+    .trust-grid{grid-template-columns:1fr 1fr}
+    .foot-top{grid-template-columns:1fr;gap:28px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .eyebrow,.hero h1,.hero .lede,.navigator{opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#" class="brand" aria-label="Axis Homes home">
+      <svg class="mark" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#e3c478"/><stop offset="1" stop-color="#9c8146"/>
+        </linearGradient></defs>
+        <path d="M50 8 L88 92 L70 92 L50 40 L30 92 L12 92 Z" fill="url(#g)"/>
+        <path d="M50 40 L58 20 L66 14 M62 18 L66 14 L62 12" stroke="url(#g)" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <rect x="42" y="52" width="16" height="4" fill="url(#g)"/>
+        <rect x="42" y="60" width="16" height="4" fill="url(#g)"/>
+      </svg>
+      <span class="name">AXIS<span>HOMES</span></span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#tracks">Ready to Move</a></li>
+        <li><a href="#listings">Listings</a></li>
+        <li><a href="#tracks">Plots</a></li>
+        <li><a href="#nri" class="nri">NRI Desk</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="menu-btn" aria-label="Open menu">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="sky"></div>
+    <svg class="skyline" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+      <g fill="#0a0f17" opacity="0.85">
+        <rect x="40" y="160" width="60" height="140"/><rect x="120" y="120" width="44" height="180"/>
+        <rect x="180" y="190" width="70" height="110"/><rect x="270" y="90" width="52" height="210"/>
+        <rect x="340" y="150" width="40" height="150"/><rect x="400" y="130" width="64" height="170"/>
+        <rect x="490" y="70" width="48" height="230"/><rect x="560" y="170" width="72" height="130"/>
+        <rect x="650" y="110" width="44" height="190"/><rect x="710" y="50" width="56" height="250"/>
+        <rect x="785" y="140" width="60" height="160"/><rect x="860" y="100" width="46" height="200"/>
+        <rect x="920" y="180" width="74" height="120"/><rect x="1010" y="80" width="50" height="220"/>
+        <rect x="1080" y="150" width="42" height="150"/><rect x="1140" y="120" width="66" height="180"/>
+        <rect x="1220" y="190" width="58" height="110"/><rect x="1290" y="100" width="48" height="200"/>
+        <rect x="1350" y="160" width="70" height="140"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="wrap">
+      <p class="eyebrow">Curated Estates · Bespoke Service · Legal Integrity</p>
+      <h1>Address worthy of <em>India's Silicon Valley.</em></h1>
+      <p class="lede">A boutique brokerage for Bangalore's most considered buyers — <b>ready-to-move penthouses, pre-launch towers, and gated land</b> across the city's premier micro-markets.</p>
+
+      <!-- SIGNATURE: Micro-market navigator -->
+      <div class="navigator">
+        <p class="nav-label">Find your address</p>
+        <div class="nav-bar">
+          <div class="nav-field">
+            <label for="mm">Micro-market</label>
+            <select id="mm">
+              <option>Any micro-market</option>
+              <option>Lavelle Road</option>
+              <option>Whitefield</option>
+              <option>Indiranagar</option>
+              <option>Hebbal</option>
+              <option>Sadashivnagar</option>
+            </select>
+          </div>
+          <div class="nav-field">
+            <label for="ac">Asset class</label>
+            <select id="ac">
+              <option>Any asset</option>
+              <option>Penthouse</option>
+              <option>Villa</option>
+              <option>Gated plot</option>
+            </select>
+          </div>
+          <div class="nav-field">
+            <label for="pr">Price range</label>
+            <select id="pr">
+              <option>Any budget</option>
+              <option>₹5 Cr – ₹10 Cr</option>
+              <option>₹10 Cr – ₹20 Cr</option>
+              <option>₹20 Cr +</option>
+            </select>
+          </div>
+          <button class="nav-go">Search</button>
+        </div>
+        <div class="micro-chips">
+          <span>Popular:</span>
+          <a href="#listings">Whitefield</a>
+          <a href="#listings">Sadashivnagar</a>
+          <a href="#listings">Hebbal</a>
+          <a href="#listings">Lavelle Road</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-grid">
+      <div><div class="num">₹2,400<span style="font-size:24px"> Cr</span></div><div class="lbl">Estate value transacted</div></div>
+      <div><div class="num">340<span style="font-size:24px">+</span></div><div class="lbl">Families settled</div></div>
+      <div><div class="num">100<span style="font-size:24px">%</span></div><div class="lbl">K-RERA verified listings</div></div>
+      <div><div class="num">18<span style="font-size:24px"> yrs</span></div><div class="lbl">In Bangalore real estate</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE TRACKS -->
+<section class="tracks" id="tracks">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">How we work</p>
+      <h2>Three ways to find your place</h2>
+      <p>Every buyer arrives with a different horizon. We organise the city around yours.</p>
+      <div class="rule"></div>
+    </div>
+    <div class="track-grid">
+      <div class="track">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 22 L24 8 L40 22"/><path d="M12 20 V40 H36 V20"/><rect x="20" y="28" width="8" height="12"/></svg>
+        <h3>Ready to Move In</h3>
+        <p class="sub">RTMI · Immediate possession</p>
+        <p>Curated luxury penthouses and villas you can occupy the day you sign.</p>
+        <ul><li>Instant possession</li><li>Verified pre-owned</li><li>Premium finishes</li></ul>
+        <a href="#listings" class="cta">View RTMI listings <span class="arr">→</span></a>
+      </div>
+      <div class="track">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 42 V14 H26 V42"/><path d="M26 42 V22 H38 V42"/><path d="M14 20 H22 M14 26 H22 M14 32 H22 M30 28 H34 M30 34 H34"/><path d="M6 42 H42"/></svg>
+        <h3>New Launches</h3>
+        <p class="sub">Pre-sales · High appreciation</p>
+        <p>Early access to pre-launch towers from Bangalore's most trusted developers.</p>
+        <ul><li>Pre-launch pricing</li><li>Priority allotment</li><li>Vetted developers</li></ul>
+        <div class="developers"><b>Featured developers</b><div class="dev-logos">Sobha · Prestige · Puravankara</div></div>
+        <a href="#listings" class="cta" style="margin-top:20px">Explore new launches <span class="arr">→</span></a>
+      </div>
+      <div class="track">
+        <svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M24 6 L42 16 L24 26 L6 16 Z"/><path d="M6 16 V32 L24 42 L42 32 V16"/><path d="M24 26 V42"/></svg>
+        <h3>Bespoke Gated Plots</h3>
+        <p class="sub">Land · Build your own</p>
+        <p>Exclusive parcels with clear title for custom estate construction.</p>
+        <ul><li>Prime locations</li><li>Clear title · BDA approved</li><li>Custom design support</li></ul>
+        <a href="#listings" class="cta">Discover plots <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section class="listings" id="listings">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="sec-eyebrow">Featured residences</p>
+      <h2>A selection worth viewing</h2>
+      <div class="rule"></div>
+    </div>
+    <div class="filter-row">
+      <button class="active">All</button>
+      <button>Ready to Move</button>
+      <button>New Launch</button>
+      <button>Plots</button>
+    </div>
+    <div class="listing-grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- NRI BAND -->
+<section class="nri-band" id="nri">
+  <div class="wrap">
+    <div class="nri-inner">
+      <div>
+        <p class="sec-eyebrow">For buyers abroad</p>
+        <h2>Bangalore property, <em>managed across time zones.</em></h2>
+        <p>A dedicated desk for NRI investors — from documentation and power of attorney to virtual viewings and repatriation guidance. We close while you sleep.</p>
+        <a href="#contact" class="nri-cta">Speak to the NRI desk</a>
+      </div>
+      <ul class="nri-points">
+        <li><span class="n">01</span><div class="t"><b>Virtual private viewings</b><span>Walk through every residence over a live video tour.</span></div></li>
+        <li><span class="n">02</span><div class="t"><b>End-to-end documentation</b><span>POA, registration, and FEMA-compliant transfers handled.</span></div></li>
+        <li><span class="n">03</span><div class="t"><b>Repatriation & tax guidance</b><span>Structuring advice for resale and rental income.</span></div></li>
+        <li><span class="n">04</span><div class="t"><b>One point of contact</b><span>A single relationship manager, in your time zone.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div>
+        <p class="sec-eyebrow">Begin the conversation</p>
+        <h2>Request a <em>private consultation.</em></h2>
+        <p class="lede">Tell us what you're looking for. A senior advisor will reach out within one business day — no call centre, no mass mailers.</p>
+        <div class="contact-detail"><span class="k">Office</span><span class="v">Lavelle Road, Bangalore 560001</span></div>
+        <div class="contact-detail"><span class="k">Phone</span><span class="v">+91 80 4000 0000</span></div>
+        <div class="contact-detail"><span class="k">Email</span><span class="v">desk@axishomes.in</span></div>
+        <div class="contact-detail"><span class="k">Hours</span><span class="v">Mon–Sat · 9:30am – 7:00pm IST</span></div>
+      </div>
+      <div class="form">
+        <div class="field"><label for="f-name">Full name</label><input id="f-name" type="text" placeholder="Your name"></div>
+        <div class="field"><label for="f-phone">Phone</label><input id="f-phone" type="tel" placeholder="+91"></div>
+        <div class="field"><label for="f-int">I'm interested in</label>
+          <select id="f-int"><option>Ready to move in</option><option>A new launch</option><option>Gated plots</option><option>NRI advisory</option></select>
+        </div>
+        <div class="field"><label for="f-msg">What you're looking for</label><textarea id="f-msg" rows="3" placeholder="Micro-market, budget, timeline…"></textarea></div>
+        <button class="submit">Request consultation</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="name">AXIS HOMES</div>
+        <p>A boutique luxury brokerage curating Bangalore's finest estates with legal integrity and bespoke service.</p>
+      </div>
+      <div class="foot-col"><h5>Explore</h5><a href="#tracks">Ready to Move</a><a href="#listings">New Launches</a><a href="#tracks">Gated Plots</a><a href="#listings">Featured Listings</a></div>
+      <div class="foot-col"><h5>Buyers</h5><a href="#nri">NRI Desk</a><a href="#contact">Investors</a><a href="#contact">Private Viewing</a><a href="#contact">Contact</a></div>
+      <div class="foot-col"><h5>Micro-markets</h5><a href="#listings">Lavelle Road</a><a href="#listings">Whitefield</a><a href="#listings">Indiranagar</a><a href="#listings">Hebbal</a></div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 Axis Homes. All rights reserved.</p>
+      <p class="rera-foot">K-RERA Agent Reg. No. PRM/KA/RERA/1234/123/AG/000000</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header scroll state
+  const hdr=document.getElementById('hdr');
+  window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',window.scrollY>40));
+
+  // listings data
+  const homes=[
+    {name:"Aquaview Sky Villas",loc:"Hebbal",tag:"New Launch",beds:"4 BHK",area:"14,000",feat:"Pvt. Helipad",price:"₹15",rera:"PRM/KA/RERA/1224/003009"},
+    {name:"The Lavelle Residences",loc:"Lavelle Road",tag:"Ready to Move",beds:"3 BHK",area:"6,200",feat:"Wine Cellar",price:"₹9.4",rera:"PRM/KA/RERA/1187/002214"},
+    {name:"Sadashiv Terraces",loc:"Sadashivnagar",tag:"Ready to Move",beds:"5 BHK",area:"11,500",feat:"Private Pool",price:"₹22",rera:"PRM/KA/RERA/1290/004471"},
+    {name:"Whitefield Greens Estate",loc:"Whitefield",tag:"Plots",beds:"Land",area:"9,800",feat:"BDA Approved",price:"₹6.1",rera:"PRM/KA/RERA/1331/005120"},
+    {name:"Indiranagar Atelier",loc:"Indiranagar",tag:"New Launch",beds:"4 BHK",area:"8,400",feat:"Smart Home",price:"₹12.5",rera:"PRM/KA/RERA/1256/003844"},
+    {name:"Hebbal Lakehouse",loc:"Hebbal",tag:"Ready to Move",beds:"4 BHK",area:"10,200",feat:"Lake Frontage",price:"₹13.8",rera:"PRM/KA/RERA/1199/002901"},
+  ];
+  // tasteful gradient placeholders (twilight tower palette) per card
+  const grads=[
+    "linear-gradient(150deg,#1c2c40,#3a5575 60%,#caa96f)",
+    "linear-gradient(150deg,#16202e,#2d4258 55%,#6f7d8a)",
+    "linear-gradient(150deg,#0e1622,#3a5575 70%,#9c8146)",
+    "linear-gradient(150deg,#1a2330,#243750 60%,#8c97a6)",
+    "linear-gradient(150deg,#16202e,#3a5575 55%,#e3c478)",
+    "linear-gradient(150deg,#0e1622,#2d4258 65%,#caa96f)",
+  ];
+  const grid=document.getElementById('grid');
+  grid.innerHTML=homes.map((h,i)=>`
+    <article class="card" data-tag="${h.tag}">
+      <div class="card-img">
+        <div class="ph" style="background:${grads[i]}"></div>
+        <span class="tag">${h.tag}</span>
+        <button class="fav" aria-label="Save ${h.name}">♡</button>
+      </div>
+      <div class="card-body">
+        <h4>${h.name}</h4>
+        <div class="loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>${h.loc}, Bangalore</div>
+        <div class="specs">
+          <div><div class="v">${h.beds}</div><div class="k">Config</div></div>
+          <div><div class="v">${h.area}</div><div class="k">Sq Ft</div></div>
+          <div><div class="v">${h.feat}</div><div class="k">Feature</div></div>
+        </div>
+        <div class="price">${h.price} Cr<small>onwards</small></div>
+        <div class="card-foot">
+          <div class="rera"><svg class="seal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.5 5 5.5.8-4 3.9.9 5.5L12 20l-4.9 2.2.9-5.5-4-3.9 5.5-.8z"/></svg><b>K-RERA</b> ${h.rera}</div>
+          <div class="card-actions">
+            <button class="btn-primary">Request Viewing</button>
+            <button class="btn-ghost">Brochure</button>
+          </div>
+        </div>
+      </div>
+    </article>`).join('');
+
+  // filter
+  document.querySelectorAll('.filter-row button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-row button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      const f=b.textContent.trim();
+      document.querySelectorAll('.card').forEach(c=>{
+        c.style.display=(f==='All'||c.dataset.tag===f)?'flex':'none';
+      });
+    });
+  });
+
+  // fav toggle
+  grid.addEventListener('click',e=>{
+    if(e.target.classList.contains('fav')){
+      e.target.textContent=e.target.textContent==='♡'?'♥':'♡';
+      e.target.style.color=e.target.textContent==='♥'?'#0c1118':'';
+      e.target.style.background=e.target.textContent==='♥'?'#c9a24b':'';
+    }
+  });
+</script>
+</body>
+</html>
